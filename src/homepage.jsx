@@ -1,10 +1,6 @@
-import { useState } from "react";
-import GameScreen from "./game/game";
 
-
-export default function App() {
-  const [playGame, setPlayGame] = useState(false);
-  while(!playGame){
+export default function homePage(){
+while(!playGame){
     return (
     <div className="home-page">
       <h1>Whack-A-Mole</h1>
@@ -21,11 +17,8 @@ export default function App() {
   return(
     
     <div>
-      <GameScreen />
+      <p>Play the game you goof :) {console.log("something")}</p> 
     
     </div>
   );
 }
-
-
-//for use later window.open("https://youtu.be/dQw4w9WgXcQ?si=1deqwQXLe8xdRlqI") <Game></Game>
