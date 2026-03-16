@@ -1,30 +1,20 @@
-import { useState } from "react";
+import { useGame } from "./gameContext";
 import GameScreen from "./game/game";
+import HomePage from "./homepage";
 
 
 export default function App() {
-  const [playGame, setPlayGame] = useState(false);
-  while(!playGame){
-    return (
-    <div className="home-page">
-      <h1>Whack-A-Mole</h1>
-      <p>Welcome to Whack-A-Mole!</p>
-      <p>Whack a mole to earn points.</p>
-      <p>Can you beat the high score?</p>
-      <button onClick={()=>setPlayGame((current) => !current )}>Play</button>
-      <h2>High Scores</h2>
-      <p>None yet. Play the game! conditionally show highest score.</p>
-    </div>
-    );
-  }
+  const { playGame } = useGame();
 
-  return(
-    
-    <div>
-      <GameScreen />
-    
-    </div>
-  );
+  if(!playGame){
+    return (<HomePage />);
+  }else{
+    return(
+      <div>
+        <GameScreen />
+      </div>
+   );
+  }
 }
 
 

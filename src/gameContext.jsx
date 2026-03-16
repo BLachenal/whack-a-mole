@@ -4,10 +4,11 @@ const GameContext = createContext();
 
 const NUM_HOLES = 9;
 
-export const gameProvider =({children})=>{
+export const GameProvider =({children})=>{
     const [playGame, setPlayGame] = useState(false);
     const [currentScore, setCurrentScore] = useState(0);
     const [moleHole, setMoleHole] = useState();
+    const [highScores, setHighScores] = useState([]);
 
     const holes = Array.from({length: NUM_HOLES}, (_, i) => i);
 
@@ -18,7 +19,7 @@ export const gameProvider =({children})=>{
     }
    
     const randomMole = () => {
-        const nextHole = math.floor(math.random() * NUM_HOLES);
+        const nextHole = Math.floor(Math.random() * NUM_HOLES);
         setMoleHole(nextHole);
     }
 
@@ -27,10 +28,15 @@ export const gameProvider =({children})=>{
         randomMole();
     }
 
-
     const restart = () =>{
+        highScoreList();
         setPlayGame(false);
         setCurrentScore(0);
+    }
+
+    const highScoreList = () => {
+        const newScoreList = [...highScores, currentScore ];
+        setHighScores(newScoreList);
     }
 
     return (
@@ -38,10 +44,13 @@ export const gameProvider =({children})=>{
             playGame, 
             currentScore, 
             moleHole, 
-            holes, 
+            holes,
+            highScores, 
             startGame, 
             whackMole, 
-            restart}}>
+            restart,
+            
+            }}>
 
                 {children}
         </GameContext>

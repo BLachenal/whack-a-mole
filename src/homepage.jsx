@@ -1,24 +1,21 @@
+import { useGame } from "./gameContext";
 
-export default function homePage(){
-while(!playGame){
+export default function HomePage(){
+    const {startGame, highScores} = useGame();
+    const scoreList = [...highScores.sort((a, b) => b - a)]
+
     return (
     <div className="home-page">
-      <h1>Whack-A-Mole</h1>
+      <h1 className="title">Whack-A-Mole</h1>
       <p>Welcome to Whack-A-Mole!</p>
       <p>Whack a mole to earn points.</p>
       <p>Can you beat the high score?</p>
-      <button onClick={()=>setPlayGame((current) => !current )}>Play</button>
+      <button onClick={startGame}>Play</button>
       <h2>High Scores</h2>
-      <p>None yet. Play the game! conditionally show highest score.</p>
+      <div>{highScores.length === 0 ? "None yet. Play the game!" : 
+      scoreList.map((score, index)=> (
+        <div key = {index}>{score}</div>
+      ))}</div>
     </div>
     );
-  }
-
-  return(
-    
-    <div>
-      <p>Play the game you goof :) {console.log("something")}</p> 
-    
-    </div>
-  );
 }
